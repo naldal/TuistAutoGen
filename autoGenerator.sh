@@ -1,14 +1,22 @@
 #!/bin/bash
 
+currentShell=$(echo "$0")
+exec bash
+
+GeneratorRoot=$(pwd)
+echo "Generator Root: "$GeneratorRoot
+
 # 테스트: 초기화
 mv TuistProject/Projects/Tool/Lint temp/
 mv TuistProject/Projects/Core/Targets/Core/Resources/Images.xcassets/AppIcon.appiconset/appIcon.jpg temp/ 
 rm -rf TuistProject
 
-# 폴더를 생성합니다
+# Tuist가 프로젝트를 담을 파일 생성
 mkdir TuistProject && cd TuistProject
+TuistProjectRoot=$GeneratorRoot/TuistProject
+echo "Tuist Project Root: "$TuistProjectRoot
 
-# Tuist 프로젝트를 초기화합니다
+# Tuist 프로젝트 초기화
 tuist init
 
 # Configs 구성
@@ -19,13 +27,14 @@ let config = Config(
     
 )
 ' > Config.swift
-cd ../
+cd $TuistProjectRoot
+echo "1: "$(pwd)
 
 # 불필요한 폴더를 제거합니다
 rm -rf Plugins
 rm -rf Targets
 
-# Workspace.swift 파일을 생성하고 덮어쓰기를 합니다
+# Workspace.swift 파일 생성
 echo 'import ProjectDescription
 
 let workspaceName = "workspace"
@@ -39,10 +48,10 @@ let workspace = Workspace(
 # 기본 Project.swift 제거
 rm Project.swift
 
-# Projects 폴더를 생성합니다
+# Projects 폴더 생성
 mkdir Projects
 
-# Tuist - ProjectDescriptionHelpers - Project+Templates.swift 에 코드를 덮어쓰기한다
+# Tuist - ProjectDescriptionHelpers - Project+Templates.swift
 cd Tuist && cd ProjectDescriptionHelpers
 
 echo 'import ProjectDescription
@@ -233,7 +242,7 @@ public extension Project {
   }
 }' > Project+Templates.swift
 
-# Tuist/ProjectDescriptionHelpers/Project+Framework.swift 를 만든다
+# Tuist/ProjectDescriptionHelpers/Project+Framework.swift
 touch Project+Framework.swift
 echo 'import ProjectDescription
 
@@ -315,7 +324,7 @@ extension TargetScript {
   }
 }' > Project+Scripts.swift
 
-# Tuist/ProjectDescriptionHelpers/Project+Dependency.swift 를 만든다
+# Tuist/ProjectDescriptionHelpers/Project+Dependency.swift
 touch Project+Dependency.swift
 echo 'import ProjectDescription
 
@@ -324,23 +333,25 @@ public extension TargetDependency {
   static let nimble: TargetDependency = .external(name: "Nimble")
 }' > Project+Dependency.swift
 
-# 다시 루트 폴더로 돌아간다
-cd ../../
+# 다시 루트 폴더로 이동
+cd $TuistProjectRoot
+echo "2: "$(pwd)
 
-# Projects 구성시작
+# Projects 구성 시작
 cd Projects
 
-# Tool 폴더를 만든다
+# Tool 폴더 생성
 mkdir Tool && cd Tool
 
-# Tool/Lint 폴더를 구성
-cd ../../../
+# Tool/Lint 폴더 구성
+cd $GeneratorRoot
+echo "3: "$(pwd)
 mv temp/Lint TuistProject/Projects/Tool
 
 # Core 파일 구성
 cd TuistProject && cd Projects && mkdir Core && cd Core
 
-# Core - Support 파일을 구성
+# Core - Support 파일 구성
 mkdir Support
 cd Support
 
@@ -412,7 +423,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>
 </plist>
 ' > Info.plist
 
-# Core - Support - BridgingHeader 파일을 구성
+# Core - Support - BridgingHeader 파일 구성
 cd ../
 mkdir BridgingHeader
 cd BridgingHeader
@@ -430,7 +441,7 @@ echo '#ifndef Core-Bridging-Header.h
 #endif /* Core-Bridging-Header.h */
 ' > Core-Bridging-Header.h
 
-# Core - Target 이하 파일을 구성
+# Core - Target 이하 파일 구성
 cd ../../
 mkdir Targets
 cd Targets
@@ -576,8 +587,8 @@ echo '{
 }
 ' > Contents.json
 
-cd ../../../../../../../../
-echo $(pwd)
+cd $GeneratorRoot
+echo "4: "$(pwd)
 mv temp/appIcon.jpg TuistProject/Projects/Core/Targets/Core/Resources/Images.xcassets/AppIcon.appiconset/
 
 
@@ -700,9 +711,9 @@ touch Release.xcconfig
 echo '#include "Core.xcconfig"' > Release.xcconfig
 
 cd ../../../
-echo $(pwd)
+echo "5: "$(pwd)
 
-# Core - Project.swift 를 만든다.
+# Core - Project.swift
 touch Project.swift
 echo 'import ProjectDescription
 import ProjectDescriptionHelpers
