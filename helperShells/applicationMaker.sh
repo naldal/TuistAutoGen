@@ -370,3 +370,20 @@ CODE_SIGN_STYLE = Manual
   )" > Project.swift
 
 }
+
+function makeIncludeOnlyApplication() { 
+  projectName=$1
+  mkdir $projectName && cd $projectName
+  touch Project.swift
+  echo "import ProjectDescription
+import ProjectDescriptionHelpers
+
+let projectName: String = \"$projectName\"
+let project = Project.makeModule(
+  name: projectName,
+  product: .app,
+  additionalTargets: [],
+  isIncludeOnly: true
+)
+" > Project.swift
+}

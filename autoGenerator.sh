@@ -68,7 +68,7 @@ GeneratorRoot=$(pwd)
 mv TuistProject/Projects/Tool/Lint temp/
 mv TuistProject/Projects/"$main"/Targets/"$main"/Resources/Images.xcassets/AppIcon.appiconset/appIcon.jpg temp/ 
 rm -rf TuistProject
-
+exit 1
 # Tuist가 프로젝트를 담을 파일 생성
 mkdir TuistProject && cd TuistProject
 TuistProjectRoot=$GeneratorRoot/TuistProject
@@ -146,13 +146,20 @@ cd TuistProject && cd Projects
 
 # Make Main Application
 makeMainApp $main
-tuist generate -n
+
+# Make Frameworks
+for aFramework in "${frameworks[@]}"; do
+  cd $ProjectsPath
+  makeFramework "$aFramework"  
+done
+cd $TuistProjectRoot
+
+# Make OnlyIncludes Applications
+for anApplications in "${includeOnlys[@]}"; do
+  cd $ProjectsPath
+  makeIncludeOnlyApplication "$anApplications"
+done
+cd $TuistProjectRoot
+tuist fetch && tuist generate -n
 cd $ProjectsPath
 
-# Make Framework
-for aFramework in "${frameworks[@]}"; do
-  makeFramework "$aFramework"
-  cd $TuistProjectRoot
-done
-tuist fetch
-tuist generate -n
