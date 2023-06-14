@@ -99,7 +99,7 @@ let project = Project(
     name: projectName,
     customInfoPlist: .default,
     dependencies: [],
-    testDependencies: [.quick, .nimble]
+    testDependencies: []
   )
 )
 " > Project.swift

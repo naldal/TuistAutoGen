@@ -233,7 +233,7 @@ function makeMainApp() {
   ' > Contents.json
 
   cd $GeneratorRoot
-  mv "temp/appIcon.jpg" "TuistProject/Projects/$projectName/Targets/$projectName/Resources/Images.xcassets/AppIcon.appiconset/"
+  cp "temp/appIcon.jpg" "TuistProject/Projects/$projectName/Targets/$projectName/Resources/Images.xcassets/AppIcon.appiconset/"
 
 
   # $projectName - Sources
@@ -392,11 +392,10 @@ function makeIncludeOnlyApplication() {
     touch sample.json
     echo '{}' > sample.json
     cd $currPath
+    cd $projectName
     includeResult=false
   fi 
-  
 
-  
   touch Project.swift
   echo "import ProjectDescription
 import ProjectDescriptionHelpers
