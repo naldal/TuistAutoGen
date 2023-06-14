@@ -3,10 +3,10 @@ function makeMainApp() {
   mkdir $projectName && cd $projectName
 
   mkdir Support && cd Support
+  mkdir InfoPlist && cd InfoPlist
 
-  mkdir InfoPlist
-  cd InfoPlist
   touch Info.plist
+
   echo '<?xml version="1.0" encoding="UTF-8"?>
   <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
   <plist version="1.0">
@@ -369,5 +369,4 @@ CODE_SIGN_STYLE = Manual
     additionalTargets: []
   )" > Project.swift
 
-  tuist generate -n
 }
