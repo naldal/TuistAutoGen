@@ -373,7 +373,30 @@ CODE_SIGN_STYLE = Manual
 
 function makeIncludeOnlyApplication() { 
   projectName=$1
-  mkdir $projectName && cd $projectName
+  isInclude=$2
+  includeResult=
+  if [ "$isInclude" == "includeOnly" ]; then
+    mkdir $projectName && cd $projectName
+    includeResult=true
+
+  elif [ "$isInclude" == "include" ]; then
+    currPath=$(pwd)
+    mkdir $projectName && cd $projectName
+    mkdir Targets && cd Targets
+    mkdir $projectName && cd $projectName
+    mkdir Sources && cd Sources
+    touch sample.swift
+    echo 'this is sample' > sample.swift
+    cd ../
+    mkdir Resources && cd Resources
+    touch sample.json
+    echo '{}' > sample.json
+    cd $currPath
+    includeResult=false
+  fi 
+  
+
+  
   touch Project.swift
   echo "import ProjectDescription
 import ProjectDescriptionHelpers
@@ -383,7 +406,7 @@ let project = Project.makeModule(
   name: projectName,
   product: .app,
   additionalTargets: [],
-  isIncludeOnly: true
+  isIncludeOnly: $includeResult
 )
 " > Project.swift
 }

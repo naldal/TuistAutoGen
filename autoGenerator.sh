@@ -68,7 +68,7 @@ GeneratorRoot=$(pwd)
 mv TuistProject/Projects/Tool/Lint temp/
 mv TuistProject/Projects/"$main"/Targets/"$main"/Resources/Images.xcassets/AppIcon.appiconset/appIcon.jpg temp/ 
 rm -rf TuistProject
-exit 1
+
 # Tuist가 프로젝트를 담을 파일 생성
 mkdir TuistProject && cd TuistProject
 TuistProjectRoot=$GeneratorRoot/TuistProject
@@ -157,7 +157,16 @@ cd $TuistProjectRoot
 # Make OnlyIncludes Applications
 for anApplications in "${includeOnlys[@]}"; do
   cd $ProjectsPath
-  makeIncludeOnlyApplication "$anApplications"
+  makeIncludeOnlyApplication "$anApplications" "includeOnly"
+done
+cd $TuistProjectRoot
+# tuist fetch && tuist generate -n
+cd $ProjectsPath
+
+# Make NotOnlyIncludes Applications
+for anApplications in "${includes[@]}"; do
+  cd $ProjectsPath
+  makeIncludeOnlyApplication "$anApplications" "include"
 done
 cd $TuistProjectRoot
 tuist fetch && tuist generate -n
