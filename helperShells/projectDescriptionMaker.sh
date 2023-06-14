@@ -1,5 +1,7 @@
-function templateDescriptionHelper() { 
-    echo 'import ProjectDescription
+function templateDescriptionHelper() {
+    originName=$1 
+    
+    echo "import ProjectDescription
 
     public extension Project {
     
@@ -7,10 +9,10 @@ function templateDescriptionHelper() {
             name: String,
             platform: Platform = .iOS,
             product: Product,
-            baseBundleId: String = "com.tuistTemplate",
-            organizationName: String = "organizationName",
+            baseBundleId: String = \"com.tuistTemplate\",
+            organizationName: String = \"organizationName\",
             packages: [Package] = [],
-            deploymentTarget: DeploymentTarget? = .iOS(targetVersion: "15.0", devices: [.iphone]),
+            deploymentTarget: DeploymentTarget? = .iOS(targetVersion: \"15.0\", devices: [.iphone]),
             dependencies: [TargetDependency] = [],
             testDependencies: [TargetDependency] = [],
             bridgingHeaderPath: String? = nil,
@@ -20,17 +22,17 @@ function templateDescriptionHelper() {
         ) -> Project {
             
             var originName: String {
-            return "Core"
+            return \"$originName\"
             }
             
             // MARK: - Targets
             
             let targetAdditionalSourcePath: [String] = [
-            "../\(originName)/Targets/\(originName)/Sources/**"
+            \"../\(originName)/Targets/\(originName)/Sources/**\"
             ]
             
             let targetAdditionalResourcePath: [String] = [
-            "../\(originName)/Targets/\(originName)/Resources/**"
+            \"../\(originName)/Targets/\(originName)/Resources/**\"
             ]
             
             let targets: [Target] = self.makeTargets(
@@ -52,7 +54,7 @@ function templateDescriptionHelper() {
             
             var baseSetting: ProjectDescription.SettingsDictionary {
             if let bridgingHeaderPath {
-                return ["SWIFT_OBJC_BRIDGING_HEADER": SettingValue(stringLiteral: bridgingHeaderPath)]
+                return [\"SWIFT_OBJC_BRIDGING_HEADER\": SettingValue(stringLiteral: bridgingHeaderPath)]
             }
             return [:]
             }
@@ -63,12 +65,12 @@ function templateDescriptionHelper() {
                 .debug(
                 name: .debug,
                 settings: baseSetting,
-                xcconfig: "../\(originName)/Targets/\(originName)/XCConfigs/Debug.xcconfig"
+                xcconfig: \"../\(originName)/Targets/\(originName)/XCConfigs/Debug.xcconfig\"
                 ),
                 .release(
                 name: .release,
                 settings: baseSetting,
-                xcconfig: "../\(originName)/Targets/\(originName)/XCConfigs/Release.xcconfig"
+                xcconfig: \"../\(originName)/Targets/\(originName)/XCConfigs/Release.xcconfig\"
                 )
             ],
             defaultSettings: .recommended
@@ -106,14 +108,14 @@ function templateDescriptionHelper() {
                 let globs: [SourceFileGlob] = {
                 var returnValue: [SourceFileGlob] = []
                 if isIncludeOnly == false {
-                    returnValue.append(SourceFileGlob.glob("../\(targetName)/Targets/\(targetName)/Sources/**"))
+                    returnValue.append(SourceFileGlob.glob(\"../\(targetName)/Targets/\(targetName)/Sources/**\"))
                 }
                 for additionalSourcePath in additionalSourcePaths {
                     returnValue.append(.glob(
                     Path(additionalSourcePath),
                     excluding: [
-                        "../\(originName)/Targets/\(originName)/Sources/AppDelegate.swift",
-                        "../\(originName)/Targets/\(originName)/Sources/SceneDelegate.swift"
+                        \"../\(originName)/Targets/\(originName)/Sources/AppDelegate.swift\",
+                        \"../\(originName)/Targets/\(originName)/Sources/SceneDelegate.swift\"
                     ]
                     ))
                 }
@@ -122,7 +124,7 @@ function templateDescriptionHelper() {
                 return SourceFilesList(globs: globs)
             } else {
                 var returnValue: [String] = additionalSourcePaths
-                returnValue.append("../\(originName)/Targets/\(originName)/Sources/**")
+                returnValue.append(\"../\(originName)/Targets/\(originName)/Sources/**\")
                 return SourceFilesList(globs: returnValue)
             }
             }()
@@ -131,7 +133,7 @@ function templateDescriptionHelper() {
             if targetName != originName {
                 var returnValue: [String] = additionalResourcePaths
                 if isIncludeOnly == false {
-                returnValue.append("../\(targetName)/Targets/\(targetName)/Resources/**")
+                returnValue.append(\"../\(targetName)/Targets/\(targetName)/Resources/**\")
                 }
                 var elements: [ResourceFileElement] = []
                 for item in returnValue {
@@ -140,7 +142,7 @@ function templateDescriptionHelper() {
                 return ResourceFileElements(resources: elements)
             } else {
                 var returnValue: [String] = additionalResourcePaths
-                returnValue.append("../\(originName)/Targets/\(originName)/Resources/**")
+                returnValue.append(\"../\(originName)/Targets/\(originName)/Resources/**\")
                 var elements: [ResourceFileElement] = []
                 for item in returnValue {
                 elements.append(.init(stringLiteral: item))
@@ -153,8 +155,8 @@ function templateDescriptionHelper() {
             let scripts: [TargetScript] = [
             TargetScript.makeScript(
                 order: .pre,
-                scriptPath: "../Tool/Lint/swiftlint --config \"../Tool/Lint/swiftlint.yml\"",
-                name: "Lint"
+                scriptPath: \"../Tool/Lint/swiftlint --config \\"\"../Tool/Lint/swiftlint.yml\\"\"\",
+                name: \"Lint\"
             )
             ]
             
@@ -162,9 +164,9 @@ function templateDescriptionHelper() {
             name: targetName,
             platform: platform,
             product: product,
-            bundleId: "\(baseBundleId).\(targetName)",
+            bundleId: \"\(baseBundleId).\(targetName)\",
             deploymentTarget: deploymentTarget,
-            infoPlist: .file(path: "../\(originName)/Support/InfoPlist/Info.plist"),
+            infoPlist: .file(path: \"../\(originName)/Support/InfoPlist/Info.plist\"),
             sources: sources,
             resources: resources,
             scripts: scripts,
@@ -172,20 +174,20 @@ function templateDescriptionHelper() {
             )
             
             let testTarget = Target(
-            name: "\(targetName)Tests",
+            name: \"\(targetName)Tests\",
             platform: platform,
             product: .unitTests,
-            bundleId: "\(baseBundleId).\(targetName)Tests",
+            bundleId: \"\(baseBundleId).\(targetName)Tests\",
             deploymentTarget: deploymentTarget,
-            infoPlist: .file(path: "../\(originName)/Support/InfoPlist/Info.plist"),
-            sources: ["../\(originName)/Targets/\(originName)/Tests/**"],
-            resources: ["../\(originName)/Targets/\(originName)/TestResources/**"],
+            infoPlist: .file(path: \"../\(originName)/Support/InfoPlist/Info.plist\"),
+            sources: [\"../\(originName)/Targets/\(originName)/Tests/**\"],
+            resources: [\"../\(originName)/Targets/\(originName)/TestResources/**\"],
             dependencies: testDependencies
             )
             
             return [mainTarget, testTarget]
         }
-    }' > Project+Templates.swift
+    }" > Project+Templates.swift
 }
 
 function frameworkDescriptionHelper() { 

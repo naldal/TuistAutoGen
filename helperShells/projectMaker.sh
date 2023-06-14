@@ -233,7 +233,6 @@ function makeMainApp() {
   ' > Contents.json
 
   cd $GeneratorRoot
-  echo "4: "$(pwd)
   mv "temp/appIcon.jpg" "TuistProject/Projects/$projectName/Targets/$projectName/Resources/Images.xcassets/AppIcon.appiconset/"
 
 
@@ -334,27 +333,26 @@ function makeMainApp() {
 
   touch $projectName.xcconfig
   echo 'ASSETCATALOG_COMPILER_APPICON_NAME=AppIcon
-  ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME=AccentColor
-  CODE_SIGN_IDENTITY=iPhone Developer
-  IPHONEOS_DEPLOYMENT_TARGET=15.0
-  MARKETING_VERSION=1.0.0
-  PRODUCT_NAME=$(TARGET_NAME)
-  SUPPORTS_MACCATALYST=NO
-  SWIFT_VERSION=5.0
-  TARGETED_DEVICE_FAMILY=1
-  OTHER_LDFLAGS = $(OTHER_LDFLAGS) -ObjC
-  CODE_SIGN_STYLE = Manual
-  ' > $projectName.xcconfig
+ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME=AccentColor
+CODE_SIGN_IDENTITY=iPhone Developer
+IPHONEOS_DEPLOYMENT_TARGET=15.0
+MARKETING_VERSION=1.0.0
+PRODUCT_NAME=$(TARGET_NAME)
+SUPPORTS_MACCATALYST=NO
+SWIFT_VERSION=5.0
+TARGETED_DEVICE_FAMILY=1
+OTHER_LDFLAGS = $(OTHER_LDFLAGS) -ObjC
+CODE_SIGN_STYLE = Manual
+' > $projectName.xcconfig
 
   touch Debug.xcconfig
   echo "SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG
-  #include "$projectName.xcconfig"" > Debug.xcconfig
+  #include \"$projectName.xcconfig"\" > Debug.xcconfig
 
   touch Release.xcconfig
-  echo '#include "$projectName.xcconfig"' > Release.xcconfig
+  echo "#include \"$projectName.xcconfig\"" > Release.xcconfig
 
   cd ../../../
-  echo "5: "$(pwd)
 
   touch Project.swift
   echo "import ProjectDescription

@@ -1,15 +1,55 @@
 #!/bin/bash
-
-currentShell=$0
-
 source ./helperShells/projectMaker.sh
 source ./helperShells/projectDescriptionMaker.sh
 
+# 빈 배열 초기화
+main=
+include=()
+includeOnly=()
+framework=()
+main_set=false
+
+# 입력 매개변수 처리
+while [ "$1" != "" ]; do
+case $1 in
+    --main )           if $main_set; then
+                            echo "--main 옵션은 한 번만 사용할 수 있습니다."
+                            exit 1
+                        fi
+                        shift
+                        main=$1
+                        main_set=true
+                        ;;
+    --include )        shift
+                        include+=("$1")
+                        ;;
+    --includeOnly )    shift
+                        includeOnly+=("$1")
+                        ;;
+    --framework )      shift
+                        framework+=("$1")
+                        ;;
+    * )                echo "알 수 없는 옵션: $1"
+                        exit 1
+esac
+shift
+done
+
+# 값을 출력
+echo "main: ${main[@]}"
+echo "include: ${include[@]}"
+echo "includeOnly: ${includeOnly[@]}"
+echo "framework: ${framework[@]}"
+
+# 현재 쉘 저장
+currentShell=$0
+
+# 루트 경로저장
 GeneratorRoot=$(pwd)
 
 # 테스트: 초기화
 mv TuistProject/Projects/Tool/Lint temp/
-mv TuistProject/Projects/Core/Targets/Core/Resources/Images.xcassets/AppIcon.appiconset/appIcon.jpg temp/ 
+mv TuistProject/Projects/$main/Targets/$main/Resources/Images.xcassets/AppIcon.appiconset/appIcon.jpg temp/ 
 rm -rf TuistProject
 
 # Tuist가 프로젝트를 담을 파일 생성
@@ -55,7 +95,7 @@ cd Tuist
 cd ProjectDescriptionHelpers
 
 # Project+Templates.swift
-templateDescriptionHelper
+templateDescriptionHelper "$main"
 
 # Project+Framework.swift
 frameworkDescriptionHelper
@@ -83,6 +123,4 @@ mv temp/Lint TuistProject/Projects/Tool
 cd TuistProject && cd Projects
 
 # Main Application
-makeMainApp "Core"
-
-exec $currentShell
+makeMainApp $main
