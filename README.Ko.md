@@ -80,15 +80,15 @@ tuist generate
 </p>
 
 Main 프로젝트에는 Supports와 Target라는 두 개의 폴더가 있습니다.
-- Supports 폴더는 InfoPlist와 BridgingHeader 폴더로 구성되어 있습니다. 각 폴더는 특정 목적을 가지고 있습니다:
-  - _InfoPlist 폴더_는 필요에 따라 다양한 유형의 정보를 포함할 수 있는 Info.plist 파일을 보관합니다.
-  - _BridgingHeader 폴더_는 Swift와 Objective-C 간의 상호 작용을 용이하게 하는 헤더 파일을 포함합니다.
-- Target 폴더는 Resources, Sources, Tests, TestResources, XCConfigs 폴더로 구성됩니다.
-	- _Resources 폴더_는 이미지, 색상, 로컬라이즈 문자열 등 애플리케이션의 자산을 관리합니다. TuistAutoGen은 자동으로 Image.xcassets 및 Color.xcassets 카탈로그를 이 폴더 내에 생성합니다.
-	- _Sources 폴더_는 자유롭게 코드를 작성할 수 있는 곳입니다.
-	- _Tests 폴더_는 단위 테스트를 위해 지정된 폴더입니다. TuistAutoGen은 테스트 라이브러리인 Quick과 Nimble을 자동으로 포함시키며, 테스트 수행을 강력히 권장합니다.
-	- _TestResources 폴더_는 특정 테스트용 리소스를 저장할 수 있는 공간입니다.
-	- _XCConfigs 폴더_는 사용자 정의 Xcode 구성 파일을 관리하는 데 사용됩니다.
+- **Supports 폴더**는 InfoPlist와 BridgingHeader 폴더로 구성되어 있습니다. 각 폴더는 특정 목적을 가지고 있습니다:
+  - *InfoPlist 폴더*는 필요에 따라 다양한 유형의 정보를 포함할 수 있는 Info.plist 파일을 보관합니다.
+  - *BridgingHeader 폴더*는 Swift와 Objective-C 간의 상호 작용을 용이하게 하는 헤더 파일을 포함합니다.
+- **Target 폴더** 는 Resources, Sources, Tests, TestResources, XCConfigs 폴더로 구성됩니다.
+	- *Resources 폴더*는 이미지, 색상, 로컬라이즈 문자열 등 애플리케이션의 자산을 관리합니다. TuistAutoGen은 자동으로 Image.xcassets 및 Color.xcassets 카탈로그를 이 폴더 내에 생성합니다.
+	- *Sources 폴더*는 자유롭게 코드를 작성할 수 있는 곳입니다.
+	- *Tests 폴더*는 단위 테스트를 위해 지정된 폴더입니다. TuistAutoGen은 테스트 라이브러리인 Quick과 Nimble을 자동으로 포함시키며, 테스트 수행을 강력히 권장합니다.
+	- *TestResources 폴더*는 특정 테스트용 리소스를 저장할 수 있는 공간입니다.
+	- *XCConfigs 폴더*는 사용자 정의 Xcode 구성 파일을 관리하는 데 사용됩니다.
 
 ## 입력 옵션 이해하기
 
