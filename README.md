@@ -12,19 +12,19 @@ Welcome to **TuistAutoGen**, a revolutionary toolset that empowers you to take f
 
 Traditionally, creating a project using Tuist from scratch to finish poses several challenges:
 
-**Complexity  💀**
+**Complexity  💀**<br>
  Tuist, while powerful, is quite complex to set up and manage, especially for beginners. It involves various configuration files and requires understanding the Tuist DSL (Domain Specific Language) to create, manipulate, and manage projects.
 
-**Time-Consuming ⏰**
+**Time-Consuming ⏰**<br>
 The process of setting up the project, managing dependencies, creating targets, and generating the Xcode project can be time-consuming, particularly for larger projects with multiple modules and dependencies.
 
-**Prone to Human Error 🧟**
+**Prone to Human Error 🧟**<br>
 The manual process of configuration and setup can lead to human errors, resulting in broken builds or runtime issues.
 
-**Difficulty in Modularization 😓**
+**Difficulty in Modularization 😓**<br>
 While Tuist supports modularization, setting up a modular project can be challenging and involves numerous steps. This includes creating separate modules, managing interdependencies, and ensuring each module can be built independently.
 
-**Framework Generation 🦿**
+**Framework Generation 🦿**<br>
 Generating frameworks for a project involves a significant amount of manual work, including setting up the targets, linking dependencies, and managing build settings.
 
 These inherent difficulties often result in slowed down development speed, increased bug risks, and a steeper learning curve for developers new to the system.
