@@ -1,11 +1,10 @@
-
 <p align="center" width="100%">
 	<img width="575" alt="Logo" src="https://github.com/naldal/TuistAutoGen/assets/45508297/cd07e010-c205-4e08-a77b-ea248c45128d">
 </p>
 
-> <h3 align="center">🚀 Simplifying the world of Project Generation and Framework Production </h3>
+> <h3 align="center">🚀 A utility library for quickly building Tuist projects. </h3>
 
-Welcome to **TuistAutoGen**, a revolutionary toolset that empowers you to take full control of your Tuist project lifecycle with seamless automation and dynamic adaptability.
+Welcome to TuistAutoGen. TuistAutoGen empowers you to fully control the Tuist project lifecycle with just one script execution.
 
 **TuistAutoGen** is more than just another project creation tool. It's an enabler, a streamliner, a powerhouse that evolves alongside your project's needs. TuistAutoGen is an elegantly designed solution for swift project modularization and framework production, all just one shell execution away!
 
@@ -101,20 +100,21 @@ TuistAutoGen has four input options: main, includeOnly, include, and framework. 
 ### Usage with Options
 **Now, you can use variety cases with these options!**
 
-For example,
-Let's say you want to make a main application and an includeOnly application. 
+Case 1) Let's assume that you want to create a main application and an includeOnly application.
+
 ```bash
 ./autoGenerator.sh --main $Main_ProjectName --includeOnly $Include_Only_ProjectName
 ```
 <br>
-How about two includeOnly applications and an include application?
 
-Not a Problem 😎
+Case 2) Let's create two includeOnly applications and one include application.
+
+There is no problem at all. 😎
 ```bash
 ./autoGenerator.sh --main $Main_ProjectName --includeOnly $Include_Only_ProjectName_One --includeOnly $Include_Only_ProjectName_Two --include $Include_ProjectName
 ```
 <br>
-Framework?
+Case 3) What about generating a framework?
 
 ```bash
 ./autoGenerator.sh --main $Main_ProjectName --framework $Framework_ProjectName
@@ -122,9 +122,9 @@ Framework?
 > **Note**: Framework should be buildable separately, not depends on Main Project, but I will fix this issue on next RC.
 
 <br>
-😭 I'm certain that you still have no idea about the purpose of these options.
+😭 I am still certain that you do not understand these input options well.
 
-Let's examine the description below to clarify.
+Now, let's explore what these options mean, their structure, and why they are necessary.
 
 
 ## "IncludeOnly" Project Structure
