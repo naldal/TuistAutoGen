@@ -2,6 +2,9 @@
 	<img width="575" alt="Logo" src="https://github.com/naldal/TuistAutoGen/assets/45508297/cd07e010-c205-4e08-a77b-ea248c45128d">
 </p>
 
+[🇰🇷 한국어로 읽기](https://github.com/naldal/TuistAutoGen/blob/main/README.Ko.md) |
+[🇺🇸 Read in English](https://github.com/naldal/TuistAutoGen/blob/main/README.md)
+
 > <h3 align="center">🚀 A utility library for quickly building Tuist projects. </h3>
 
 Welcome to TuistAutoGen. TuistAutoGen empowers you to fully control the Tuist project lifecycle with just one script execution.
