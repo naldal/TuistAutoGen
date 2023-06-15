@@ -99,7 +99,7 @@ ProjectsPath=$(pwd)
 
 mkdir Tool && cd Tool
 cd $GeneratorRoot
-cp temp/Lint TuistProject/Projects/Tool
+cp -r temp/Lint TuistProject/Projects/Tool/
 cd TuistProject && cd Projects
 makeMainApp $main
 
