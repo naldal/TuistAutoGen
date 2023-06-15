@@ -13,19 +13,19 @@ Welcome to **TuistAutoGen**, a revolutionary toolset that empowers you to take f
 
 Traditionally, creating a project using Tuist from scratch to finish poses several challenges:
 
-**💀 Complexity**
+**💀 Complexity** <br>
  Tuist, while powerful, is quite complex to set up and manage, especially for beginners. It involves various configuration files and requires understanding the Tuist DSL (Domain Specific Language) to create, manipulate, and manage projects.
 
-**⏰ Time-Consuming**
+**⏰ Time-Consuming** <br>
 The process of setting up the project, managing dependencies, creating targets, and generating the Xcode project can be time-consuming, particularly for larger projects with multiple modules and dependencies.
 
-**🧟 Prone to Human Error**
+**🧟 Prone to Human Error** <br>
 The manual process of configuration and setup can lead to human errors, resulting in broken builds or runtime issues.
 
-**😓 Difficulty in Modularization**
+**😓 Difficulty in Modularization** <br>
 While Tuist supports modularization, setting up a modular project can be challenging and involves numerous steps. This includes creating separate modules, managing interdependencies, and ensuring each module can be built independently.
 
-**🦿 Framework Generation**
+**🦿 Framework Generation** <br>
 Generating frameworks for a project involves a significant amount of manual work, including setting up the targets, linking dependencies, and managing build settings.
 
 These inherent difficulties often result in slowed down development speed, increased bug risks, and a steeper learning curve for developers new to the system.
@@ -90,7 +90,7 @@ There are two folders in the main project: **Supports** and **Target**.
 
 TuistAutoGen has four input options: main, includeOnly, include, and framework. Each option determines the type of project to be generated during project creation.
 
-|input Options   |Explain
+|input Options   |Explaination
 |----------------|-------------------------------
 `--main`         |a Main Application             
 `--includeOnly`  |an Application base on Main Application            
@@ -134,7 +134,7 @@ The `--includeOnly` option provides a unique approach for project organization. 
 </p>
 
 
-### Why IncludeOnly option needs? 
+### Why is the `--includeOnly` option needed? 
 The necessity for the `--includeOnly` option arises from its capacity to promote a cleaner, more organized project structure. It provides a way to include necessary components from the Main project without crowding the "includeOnly" project with additional resources or source files. This can be particularly useful for large-scale projects where different components need to reference shared resources, or when maintaining a lean project structure is of paramount importance. The `--includeOnly` option simplifies navigation and management, and ensures a more streamlined project setup and maintenance process.
 
 Consider the scenario where you're developing an application that has multiple variants - let's say, a "Dev" and a "Prod" version. Both versions share the same base structure and many resources, but the "Dev" version might include extra debugging tools, test data, or configuration settings.
@@ -154,7 +154,7 @@ The `--include` option presents an effective method for project organization and
 <img width="966" alt="includeProjectHiearchy" src="https://github.com/naldal/TuistAutoGen/assets/45508297/1992021f-958f-45ed-819a-aaaed7129d03">
 </p>
 
-### Why include option needs?
+### Why is the `--include` option needed?
 The need for the `--include` option stems from its ability to promote a flexible, adaptive project structure. It facilitates the process of incorporating necessary components from the Main project, while allowing the include project to retain its individual resources and source files. This can prove highly beneficial for situations where different components of a project need to reference shared resources while still maintaining their own unique files.
 
 For instance, imagine you are working on a project with multiple modules that share a common structure and resources but also require their own specific functionalities. Using the `--include` option allows you to preserve this shared structure from the Main project while each module retains its unique capabilities.
@@ -168,7 +168,7 @@ The `--framework` option signifies the creation of a project intended to be a fr
 <img width="977" alt="스크린샷 2023-06-15 오후 4 43 10" src="https://github.com/naldal/TuistAutoGen/assets/45508297/6bf25d0b-85d3-4be9-a0d8-dbe92699ab0d">
 </p>
 
-### Why framework option needs?
+### Why is the `--framework` option needed?
 The necessity for a framework stems from its ability to encapsulate code into reusable, independent components. By using the `--framework` option, developers can organize code in a way that promotes reusability, reduces complexity, and improves code maintainability. A framework can contain its specific Resources and Sources, allowing for a self-contained package of functionality that can be easily shared across multiple projects or applications.
 
 For instance, imagine having a set of functionalities or services, such as networking or database management, that are used across different projects. By bundling these functionalities into a framework using the `--framework` option, you can reduce code redundancy, streamline your development process, and increase the overall reliability of your code.
@@ -184,7 +184,7 @@ With this, you are now primed to construct Tuist projects effortlessly using the
 As we reach the conclusion of this documentation, we invite you to explore the remarkable capabilities of TuistAutoGen. Utilize it as your catalyst to streamline the project creation process, bolstering your productivity and fostering an efficient development environment. Dive in, experiment, and discover the ease and efficiency TuistAutoGen brings to your Tuist projects. The future of effortless project creation is at your fingertips with TuistAutoGen. Enjoy your journey!
 
 
-## License
+## ⚖️  License
 The MIT License (MIT)
 
 Copyright (c) 2023 Hamin Song
