@@ -2,9 +2,12 @@
 	<img width="575" alt="Logo" src="https://github.com/naldal/TuistAutoGen/assets/45508297/cd07e010-c205-4e08-a77b-ea248c45128d">
 </p>
 
-> <h3 align="center">🚀 Simplifying the world of Project Generation and Framework Production </h3>
+[🇰🇷 한국어로 읽기](https://github.com/naldal/TuistAutoGen/blob/main/README.Ko.md) |
+[🇺🇸 Read in English](https://github.com/naldal/TuistAutoGen/blob/main/README.md)
 
-Welcome to **TuistAutoGen**, a revolutionary toolset that empowers you to take full control of your Tuist project lifecycle with seamless automation and dynamic adaptability.
+> <h3 align="center">🚀 A utility library for quickly building Tuist projects. </h3>
+
+Welcome to TuistAutoGen. TuistAutoGen empowers you to fully control the Tuist project lifecycle with just one script execution.
 
 **TuistAutoGen** is more than just another project creation tool. It's an enabler, a streamliner, a powerhouse that evolves alongside your project's needs. TuistAutoGen is an elegantly designed solution for swift project modularization and framework production, all just one shell execution away!
 
@@ -12,19 +15,19 @@ Welcome to **TuistAutoGen**, a revolutionary toolset that empowers you to take f
 
 Traditionally, creating a project using Tuist from scratch to finish poses several challenges:
 
-**Complexity  💀**<br>
+**💀 Complexity** <br>
  Tuist, while powerful, is quite complex to set up and manage, especially for beginners. It involves various configuration files and requires understanding the Tuist DSL (Domain Specific Language) to create, manipulate, and manage projects.
 
-**Time-Consuming ⏰**<br>
+**⏰ Time-Consuming** <br>
 The process of setting up the project, managing dependencies, creating targets, and generating the Xcode project can be time-consuming, particularly for larger projects with multiple modules and dependencies.
 
-**Prone to Human Error 🧟**<br>
+**🧟 Prone to Human Error** <br>
 The manual process of configuration and setup can lead to human errors, resulting in broken builds or runtime issues.
 
-**Difficulty in Modularization 😓**<br>
+**😓 Difficulty in Modularization** <br>
 While Tuist supports modularization, setting up a modular project can be challenging and involves numerous steps. This includes creating separate modules, managing interdependencies, and ensuring each module can be built independently.
 
-**Framework Generation 🦿**<br>
+**🦿 Framework Generation** <br>
 Generating frameworks for a project involves a significant amount of manual work, including setting up the targets, linking dependencies, and managing build settings.
 
 These inherent difficulties often result in slowed down development speed, increased bug risks, and a steeper learning curve for developers new to the system.
@@ -48,12 +51,12 @@ For example,
 The project name you set will be the main project's name!
 
 📦TuistAutoGenerator  
- ┣ 📂temp<br>
+ ┣ 📂 temp<br>
   ┣ 📂 **TuistProject**<br>
 ┗ 📜 autoGenerator.sh
 
-Then, a folder the named "TuistProject" will be created. your all projects will be contained in this folder
-To generate Tuist project, go to **TuistProject**.
+Then, a folder the named "TuistProject" that all projects are containing will be created.
+Go to **TuistProject** to generate your project.
 ```bash
 cd TuistProject
 ```
@@ -89,7 +92,7 @@ There are two folders in the main project: **Supports** and **Target**.
 
 TuistAutoGen has four input options: main, includeOnly, include, and framework. Each option determines the type of project to be generated during project creation.
 
-|input Options   |Explain
+|input Options   |Explaination
 |----------------|-------------------------------
 `--main`         |a Main Application             
 `--includeOnly`  |an Application base on Main Application            
@@ -100,20 +103,21 @@ TuistAutoGen has four input options: main, includeOnly, include, and framework. 
 ### Usage with Options
 **Now, you can use variety cases with these options!**
 
-For example,
-Let's say you want to make a main application and an includeOnly application. 
+Case 1) Let's assume that you want to create a main application and an includeOnly application.
+
 ```bash
 ./autoGenerator.sh --main $Main_ProjectName --includeOnly $Include_Only_ProjectName
 ```
 <br>
-How about two includeOnly applications and an include application?
 
-Not a Problem 😎
+Case 2) Let's create two includeOnly applications and one include application.
+
+There is no problem at all. 😎
 ```bash
 ./autoGenerator.sh --main $Main_ProjectName --includeOnly $Include_Only_ProjectName_One --includeOnly $Include_Only_ProjectName_Two --include $Include_ProjectName
 ```
 <br>
-Framework?
+Case 3) What about generating a framework?
 
 ```bash
 ./autoGenerator.sh --main $Main_ProjectName --framework $Framework_ProjectName
@@ -121,18 +125,75 @@ Framework?
 > **Note**: Framework should be buildable separately, not depends on Main Project, but I will fix this issue on next RC.
 
 <br>
-😭 I'm certain that you still have no idea about the purpose of these options.
+😭 I am still certain that you do not understand these input options well.
 
-Let's examine the description below to clarify.
+Now, let's explore what these options mean, their structure, and why they are necessary.
 
 
 ## "IncludeOnly" Project Structure
-
+The `--includeOnly` option provides a unique approach for project organization. It allows for the creation of a project structure that includes all folders from the Main project while keeping the "includeOnly" project itself devoid of sources and resources.
 <p align="center" width="100%">
 <img width="958" alt="includeOnlyProjectHiearchy" src="https://github.com/naldal/TuistAutoGen/assets/45508297/cc643f40-6d02-4bd9-9a20-32fcee5881e8">
 </p>
 
+
+### Why is the `--includeOnly` option needed? 
+The necessity for the `--includeOnly` option arises from its capacity to promote a cleaner, more organized project structure. It provides a way to include necessary components from the Main project without crowding the "includeOnly" project with additional resources or source files. This can be particularly useful for large-scale projects where different components need to reference shared resources, or when maintaining a lean project structure is of paramount importance. The `--includeOnly` option simplifies navigation and management, and ensures a more streamlined project setup and maintenance process.
+
+Consider the scenario where you're developing an application that has multiple variants - let's say, a "Dev" and a "Prod" version. Both versions share the same base structure and many resources, but the "Dev" version might include extra debugging tools, test data, or configuration settings.
+
+In this case, the `--includeOnly` option can be a powerful tool. Here's how it might work:
+
+Your Main project includes all the source code and resources shared across both the "Dev" and "Prod" versions. This project forms the backbone of your application.
+
+Next, you create an "includeOnly" project specifically for the "Dev" version. Using the `--includeOnly` option, this project will include all the folders from the Main project but won't have its own sources or resources. Instead, it could contain specific debugging tools, additional configuration settings, or even test data exclusive for the development environment.
+
+This setup allows you to easily switch between the "Dev" and "Prod" versions while keeping your project structure clean and organized. Each version has its own dedicated project but shares the same base structure and resources, ensuring consistency while allowing for version-specific customization.
+
+
 ## "Include" Project Structure
+The `--include` option presents an effective method for project organization and resource allocation. When used, it instructs the include project to encompass all folders from the Main project while maintaining its unique sources and resources.
 <p align="center" width="100%">
 <img width="966" alt="includeProjectHiearchy" src="https://github.com/naldal/TuistAutoGen/assets/45508297/1992021f-958f-45ed-819a-aaaed7129d03">
 </p>
+
+### Why is the `--include` option needed?
+The need for the `--include` option stems from its ability to promote a flexible, adaptive project structure. It facilitates the process of incorporating necessary components from the Main project, while allowing the include project to retain its individual resources and source files. This can prove highly beneficial for situations where different components of a project need to reference shared resources while still maintaining their own unique files.
+
+For instance, imagine you are working on a project with multiple modules that share a common structure and resources but also require their own specific functionalities. Using the `--include` option allows you to preserve this shared structure from the Main project while each module retains its unique capabilities.
+
+The `--include` option ensures that while the core structure remains consistent, there's room for individuality and customization where it's needed. It simplifies project navigation, management, and provides a more efficient workflow for developers.
+
+## "Framework" Project Structure
+The `--framework` option signifies the creation of a project intended to be a framework. This framework will maintain its unique Resources, Sources, and include a sample application.
+
+<p align="center" width="100%">
+<img width="977" alt="스크린샷 2023-06-15 오후 4 43 10" src="https://github.com/naldal/TuistAutoGen/assets/45508297/6bf25d0b-85d3-4be9-a0d8-dbe92699ab0d">
+</p>
+
+### Why is the `--framework` option needed?
+The necessity for a framework stems from its ability to encapsulate code into reusable, independent components. By using the `--framework` option, developers can organize code in a way that promotes reusability, reduces complexity, and improves code maintainability. A framework can contain its specific Resources and Sources, allowing for a self-contained package of functionality that can be easily shared across multiple projects or applications.
+
+For instance, imagine having a set of functionalities or services, such as networking or database management, that are used across different projects. By bundling these functionalities into a framework using the `--framework` option, you can reduce code redundancy, streamline your development process, and increase the overall reliability of your code.
+
+Moreover, a framework also comes with a sample application. This aids in testing the framework's functionality and serves as a practical example for developers to understand how to integrate and use the framework within their own projects.
+
+In summary, the `--framework` option plays a crucial role in creating a modular, organized, and maintainable codebase, which is a key aspect of modern software development methodologies.
+
+
+## Concluding
+With this, you are now primed to construct Tuist projects effortlessly using the powerful tool, TuistAutoGen.
+
+As we reach the conclusion of this documentation, we invite you to explore the remarkable capabilities of TuistAutoGen. Utilize it as your catalyst to streamline the project creation process, bolstering your productivity and fostering an efficient development environment. Dive in, experiment, and discover the ease and efficiency TuistAutoGen brings to your Tuist projects. The future of effortless project creation is at your fingertips with TuistAutoGen. Enjoy your journey!
+
+
+## ⚖️  License
+The MIT License (MIT)
+
+Copyright (c) 2023 Hamin Song
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
