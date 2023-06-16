@@ -122,10 +122,8 @@ Case 3) What about generating a framework?
 ```bash
 ./autoGenerator.sh --main $Main_ProjectName --framework $Framework_ProjectName
 ```
-> **Note**: Framework should be buildable separately, not depends on Main Project, but I will fix this issue on next RC.
 
 <br>
-😭 I am still certain that you do not understand these input options well.
 
 Now, let's explore what these options mean, their structure, and why they are necessary.
 
