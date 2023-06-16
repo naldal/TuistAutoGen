@@ -69,13 +69,7 @@ function makeFramework() {
 </dict>
 </plist>
 ' > "$frameworkName-Info.plist"
-
-  echo "111"$(pwd)
-  
-  cd ../../
-  
-  echo "222"$(pwd)
-  
+  cd ../../  
   mkdir Targets && cd Targets
   mkdir $frameworkName && cd $frameworkName
   

@@ -35,8 +35,9 @@ while [ "$1" != "" ]; do
   shift
 done
 
-if [ -z "$main" ]; then
-    echo "The main project is not set. Would you like to set the default project name as "Default"? (Y/N)"
+if [ -z "$main" ] && [ -z "$frameworks" ]; then
+    echo "The Main project name is not set."
+    echo "Would you like to set the default project name as "Default"? (Y/N)"
     read yesToContinue
     if [ "$yesToContinue" == "N" ] ; then
       echo "Exiting the process. 😔"
@@ -50,12 +51,8 @@ if [ -z "$main" ]; then
     fi
 fi
 
-echo "main: ${main[@]}"
-echo "includes: ${includes[@]}"
-echo "includeOnlys: ${includeOnlys[@]}"
-echo "frameworks: ${frameworks[@]}"
+echo "🏃 Start to generate Tuist Projects!"
 
-currentShell=$0
 GeneratorRoot=$(pwd)
 
 rm -rf TuistProject
@@ -66,9 +63,7 @@ TuistProjectRoot=$GeneratorRoot/TuistProject
 tuist init
 cd Tuist
 echo 'import ProjectDescription
-let config = Config(
-    
-)
+let config = Config()
 ' > Config.swift
 setDependenciesDefault
 
@@ -94,6 +89,8 @@ frameworkDescriptionHelper
 scriptsDescriptionHelper
 dependencyDescriptionHelper
 
+tuist fetch
+
 cd $TuistProjectRoot && cd Projects
 ProjectsPath=$(pwd)
 
@@ -102,24 +99,33 @@ cd $GeneratorRoot
 cp -r temp/Lint TuistProject/Projects/Tool/
 cd TuistProject && cd Projects
 makeMainApp $main
+tuist generate -n
+echo "✅ $main Generated!"
 
 for aFramework in "${frameworks[@]}"; do
   cd $ProjectsPath
   makeFramework "$aFramework"  
+  tuist generate -n
+  echo "✅ $aFramework Generated!"
 done
 cd $TuistProjectRoot
 
-for anApplications in "${includeOnlys[@]}"; do
+for anApplication in "${includeOnlys[@]}"; do
   cd $ProjectsPath
-  makeIncludeOnlyApplication "$anApplications" "includeOnly"
+  makeIncludeOnlyApplication "$anApplication"
+  echo "✅ $anApplication Generated!"
+  tuist generate -n
 done
 cd $TuistProjectRoot
 
-for anApplications in "${includes[@]}"; do
+for anApplication in "${includes[@]}"; do
   cd $ProjectsPath
-  makeIncludeOnlyApplication "$anApplications" "include"
+  makeIncludeApplication "$anApplication"
+  tuist generate -n
+  echo "✅ $anApplication Generated!"
 done
 cd $TuistProjectRoot
-tuist clean && tuist fetch && tuist generate -n
+
 
 echo '🎉 All Project has Generated! 🫡'
+echo '🌱 Your Tuist Projects are in TuistProject folder 🌱'

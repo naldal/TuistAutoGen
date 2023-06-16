@@ -241,57 +241,8 @@ function makeMainApp() {
   mkdir Sources && cd Sources
 
   # AppDelegate, SceneDelegate, ViewController
-  touch AppDelegate.swift
-  echo 'import UIKit
-
-  @main
-  class AppDelegate: UIResponder, UIApplicationDelegate {
-  	
-  	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-  		return true
-  	}
-  	
-  	// MARK: UISceneSession Lifecycle
-  	
-  	func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
-  		// Called when a new scene session is being created.
-  		// Use this method to select a configuration to create the new scene with.
-  		return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
-  	}
-  	
-  	func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
-  		// Called when the user discards a scene session.
-  		// If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
-  		// Use this method to release any resources that were specific to the discarded scenes, as they will not return.
-  	}
-  }
-  ' > AppDelegate.swift
-
-  touch SceneDelegate.swift
-  echo 'import UIKit
-
-  class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-    
-    var window: UIWindow?
-  	
-  	func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-      guard let windowScene = (scene as? UIWindowScene) else { return }
-      window = UIWindow(windowScene: windowScene)
-      let mainViewController = ViewController()
-
-      window?.rootViewController = mainViewController
-      window?.makeKeyAndVisible()
-  	}
-  	
-  	func sceneDidDisconnect(_ scene: UIScene) { }
-  	func sceneDidBecomeActive(_ scene: UIScene) { }
-  	func sceneWillResignActive(_ scene: UIScene) { }
-  	func sceneWillEnterForeground(_ scene: UIScene) { }
-  	func sceneDidEnterBackground(_ scene: UIScene) { }
-  	
-  	
-  }
-  ' > SceneDelegate.swift
+  makeAppDelegate
+  makeSceneDelegate
 
   touch ViewController.swift
   echo 'import UIKit
@@ -373,28 +324,39 @@ CODE_SIGN_STYLE = Manual
 
 function makeIncludeOnlyApplication() { 
   projectName=$1
-  isInclude=$2
-  includeResult=
-  if [ "$isInclude" == "includeOnly" ]; then
-    mkdir $projectName && cd $projectName
-    includeResult=true
+  
+  mkdir $projectName && cd $projectName
+  includeResult=true
+  touch Project.swift
+  echo "import ProjectDescription
+import ProjectDescriptionHelpers
 
-  elif [ "$isInclude" == "include" ]; then
-    currPath=$(pwd)
-    mkdir $projectName && cd $projectName
-    mkdir Targets && cd Targets
-    mkdir $projectName && cd $projectName
-    mkdir Sources && cd Sources
-    touch sample.swift
-    echo 'this is sample' > sample.swift
-    cd ../
-    mkdir Resources && cd Resources
-    touch sample.json
-    echo '{}' > sample.json
-    cd $currPath
-    cd $projectName
-    includeResult=false
-  fi 
+let projectName: String = \"$projectName\"
+let project = Project.makeModule(
+  name: projectName,
+  product: .app,
+  additionalTargets: [],
+  isIncludeOnly: true
+)
+" > Project.swift
+}
+
+function makeIncludeApplication() { 
+  projectName=$1
+  
+  currPath=$(pwd)
+  mkdir $projectName && cd $projectName
+  mkdir Targets && cd Targets
+  mkdir $projectName && cd $projectName
+  mkdir Sources && cd Sources
+  makeAppDelegate
+  makeSceneDelegate
+  cd ../
+  mkdir Resources && cd Resources
+  touch sample.json
+  echo '{}' > sample.json
+  cd $currPath
+  cd $projectName
 
   touch Project.swift
   echo "import ProjectDescription
@@ -405,7 +367,65 @@ let project = Project.makeModule(
   name: projectName,
   product: .app,
   additionalTargets: [],
-  isIncludeOnly: $includeResult
+  isIncludeOnly: false
 )
 " > Project.swift
+}
+
+
+function makeAppDelegate() { 
+  touch AppDelegate.swift
+  echo 'import UIKit
+
+  @main
+  class AppDelegate: UIResponder, UIApplicationDelegate {
+  	
+  	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+  		return true
+  	}
+  	
+  	// MARK: UISceneSession Lifecycle
+  	
+  	func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
+  		// Called when a new scene session is being created.
+  		// Use this method to select a configuration to create the new scene with.
+  		return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
+  	}
+  	
+  	func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
+  		// Called when the user discards a scene session.
+  		// If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
+  		// Use this method to release any resources that were specific to the discarded scenes, as they will not return.
+  	}
+  }
+  ' > AppDelegate.swift
+
+}
+
+function makeSceneDelegate() {
+  touch SceneDelegate.swift
+  echo 'import UIKit
+
+  class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+    
+    var window: UIWindow?
+  	
+  	func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+      guard let windowScene = (scene as? UIWindowScene) else { return }
+      window = UIWindow(windowScene: windowScene)
+      let mainViewController = ViewController()
+
+      window?.rootViewController = mainViewController
+      window?.makeKeyAndVisible()
+  	}
+  	
+  	func sceneDidDisconnect(_ scene: UIScene) { }
+  	func sceneDidBecomeActive(_ scene: UIScene) { }
+  	func sceneWillResignActive(_ scene: UIScene) { }
+  	func sceneWillEnterForeground(_ scene: UIScene) { }
+  	func sceneDidEnterBackground(_ scene: UIScene) { }
+  	
+  	
+  }
+  ' > SceneDelegate.swift
 }

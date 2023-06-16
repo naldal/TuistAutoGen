@@ -107,16 +107,18 @@ function templateDescriptionHelper() {
             if targetName != originName {
                 let globs: [SourceFileGlob] = {
                 var returnValue: [SourceFileGlob] = []
+                var excludingSources: [ProjectDescription.Path] = []
                 if isIncludeOnly == false {
                     returnValue.append(SourceFileGlob.glob(\"../\(targetName)/Targets/\(targetName)/Sources/**\"))
-                }
-                for additionalSourcePath in additionalSourcePaths {
-                    returnValue.append(.glob(
-                    Path(additionalSourcePath),
-                    excluding: [
+                    excludingSources = [
                         \"../\(originName)/Targets/\(originName)/Sources/AppDelegate.swift\",
                         \"../\(originName)/Targets/\(originName)/Sources/SceneDelegate.swift\"
                     ]
+                }
+                for additionalSourcePath in additionalSourcePaths {
+                        returnValue.append(.glob(
+                        Path(additionalSourcePath),
+                        excluding: excludingSources
                     ))
                 }
                 return returnValue
@@ -133,7 +135,7 @@ function templateDescriptionHelper() {
             if targetName != originName {
                 var returnValue: [String] = additionalResourcePaths
                 if isIncludeOnly == false {
-                returnValue.append(\"../\(targetName)/Targets/\(targetName)/Resources/**\")
+                    returnValue.append(\"../\(targetName)/Targets/\(targetName)/Resources/**\")
                 }
                 var elements: [ResourceFileElement] = []
                 for item in returnValue {
@@ -145,7 +147,7 @@ function templateDescriptionHelper() {
                 returnValue.append(\"../\(originName)/Targets/\(originName)/Resources/**\")
                 var elements: [ResourceFileElement] = []
                 for item in returnValue {
-                elements.append(.init(stringLiteral: item))
+                    elements.append(.init(stringLiteral: item))
                 }
                 return ResourceFileElements(resources: elements)
             }
