@@ -168,7 +168,7 @@ TuistAutoGen에는 main, includeOnly, include 및 framework의 네 가지 입력
 `--framework` 옵션은 프레임워크를 생성하는 프로젝트를 의미합니다. 이 프레임워크는 고유한 리소스와 소스를 유지하며, 샘플 앱도 자동으로 포함됩니다.
 
 <p align="center" width="100%">
-<img width="977" alt="스크린샷 2023-06-15 오후 4 43 10" src="https://github.com/naldal/TuistAutoGen/assets/45508297/6bf25d0b-85d3-4be9-a0d8-dbe92699ab0d">
+<img width="977" alt="FrameworkHiearchy" src="https://github.com/naldal/TuistAutoGen/assets/45508297/6bf25d0b-85d3-4be9-a0d8-dbe92699ab0d">
 </p>
 
 ### `--framework` 옵션의 필요성
@@ -179,6 +179,12 @@ TuistAutoGen에는 main, includeOnly, include 및 framework의 네 가지 입력
 또한, 프레임워크는 샘플 애플리케이션과 함께 제공됩니다. 이는 프레임워크의 기능을 테스트하는 데 도움을 주며, 개발자가 자신의 프로젝트에 프레임워크를 통합하고 사용하는 방법을 이해하는 데 실용적인 예시로 사용됩니다.
 
 요약하면, `--framework` 옵션은 모듈화되고 구성이 잘 정리된 유지 가능한 코드베이스를 생성하는 데 핵심적인 역할을 수행합니다. 이는 현대적인 소프트웨어 개발 방법론의 중요한 측면입니다.
+
+## 🗺️ 로드맵
+
+ * [x] 📦 framework 단일 생성 가능화
+ * [ ] 🫥 auto codesign 적용
+ * [ ] 🖌️ tuist stencil 적용
 
 
 ## 마치며
