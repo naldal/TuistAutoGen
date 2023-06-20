@@ -5,7 +5,7 @@
 [🇰🇷 한국어로 읽기](https://github.com/naldal/TuistAutoGen/blob/main/README.Ko.md) |
 [🇺🇸 Read in English](https://github.com/naldal/TuistAutoGen/blob/main/README.md)
 
-> <h3 align="center">🚀 A utility library for quickly building Tuist projects. </h3>
+<h3 align="center">🚀 A utility library for quickly building Tuist projects. </h3>
 
 Welcome to TuistAutoGen. TuistAutoGen empowers you to fully control the Tuist project lifecycle with just one script execution.
 
@@ -183,6 +183,12 @@ In summary, the `--framework` option plays a crucial role in creating a modular,
 With this, you are now primed to construct Tuist projects effortlessly using the powerful tool, TuistAutoGen.
 
 As we reach the conclusion of this documentation, we invite you to explore the remarkable capabilities of TuistAutoGen. Utilize it as your catalyst to streamline the project creation process, bolstering your productivity and fostering an efficient development environment. Dive in, experiment, and discover the ease and efficiency TuistAutoGen brings to your Tuist projects. The future of effortless project creation is at your fingertips with TuistAutoGen. Enjoy your journey!
+
+## 🗺️ Road Map
+
+ * [x] 📦 enabled to generate just only framework
+ * [ ] 🫥 adjust auto codesign
+ * [ ] 🖌️ adjust tuist stencil
 
 
 ## ⚖️  License
