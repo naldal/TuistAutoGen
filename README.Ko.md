@@ -5,11 +5,10 @@
 [🇰🇷 한국어로 읽기](https://github.com/naldal/TuistAutoGen/blob/main/README.Ko.md) |
 [🇺🇸 Read in English](https://github.com/naldal/TuistAutoGen/blob/main/README.md)
 
-> <h3 align="center">🚀 Tuist 프로젝트를 간단하게 구축할 수 있는 유틸리티 라이브러리 </h3>
-
-TuistAutoGen에 오신 것을 환영합니다. TuistAutoGen은 한 번의 스크립트 실행으로 Tuist 프로젝트 라이프사이클을 완벽하게 제어할 수 있게 해줍니다.
-
-TuistAutoGen은 단순한 프로젝트 생성 도구 이상입니다. 이는 프로젝트의 요구에 맞게 진화하는 도구로, 프로젝트의 필요에 따라 발전하며 손쉽게 사용할 수 있습니다. TuistAutoGen은 뛰어난 디자인으로 신속한 프로젝트 모듈화와 프레임워크 제작을 위한 솔루션입니다. 이 모든 것이 단 한 번의 쉘 실행으로 이루어집니다!
+<h3 align="center">🚀 Tuist 프로젝트를 간단하게 구축할 수 있는 유틸리티 라이브러리 </h3>
+<br></br>
+TuistAutoGen에 오신것을 환영합니다. TuistAutoGen은 한 번의 스크립트 실행으로 Tuist 프로젝트 라이프사이클을 완벽하게 제어할 수 있습니다. <br></br>
+TuistAutoGen은 단순한 프로젝트 생성 도구 이상입니다. 이는 프로젝트의 요구에 맞게 진화하는 도구로, 프로젝트의 필요에 따라 발전하며 손쉽게 수정할 수 있습니다. TuistAutoGen은 뛰어난 디자인으로 신속한 프로젝트 모듈화와 프레임워크 제작을 위한 솔루션입니다. 이 모든 것이 단 한 번의 쉘 실행으로 이루어집니다!
 
 ## 왜 TuistAutoGen를 사용해야 할까요?
 
