@@ -63,7 +63,9 @@ TuistProjectRoot=$GeneratorRoot/TuistProject
 tuist init
 cd Tuist
 echo 'import ProjectDescription
+
 let config = Config()
+
 ' > Config.swift
 setDependenciesDefault
 
@@ -89,12 +91,18 @@ frameworkDescriptionHelper
 scriptsDescriptionHelper
 dependencyDescriptionHelper
 
-tuist fetch
-
 cd $TuistProjectRoot && cd Projects
 ProjectsPath=$(pwd)
 
 mkdir Tool && cd Tool
+
+
+cd $TuistProjectRoot
+echo "📦 Fetching Test Dependencies 'Quick' and 'Nimble'"
+tuist fetch -u
+echo "🎉 Fetching Dependencies Completed! 👍"
+
+
 cd $GeneratorRoot
 cp -r temp/Lint TuistProject/Projects/Tool/
 cd TuistProject && cd Projects
@@ -125,7 +133,6 @@ for anApplication in "${includes[@]}"; do
   echo "✅ $anApplication Generated!"
 done
 cd $TuistProjectRoot
-
-
 echo '🎉 All Project has Generated! 🫡'
+
 echo '🌱 Your Tuist Projects are in TuistProject folder 🌱'
