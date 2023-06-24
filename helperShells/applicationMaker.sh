@@ -84,8 +84,7 @@ function makeMainApp() {
   #endif /* Common_h */' > Common.h
   echo "#ifndef $applicationName-Bridging-Header.h
   #define $applicationName-Bridging-Header.h
-
-  #import "Common.h"
+  
   #endif /* $applicationName-Bridging-Header.h */
   " > $applicationName-Bridging-Header.h
 
@@ -267,16 +266,15 @@ class ViewController: UIViewController {
   mkdir Tests
   cd Tests
 
-  touch SampleTests.json
-  echo 'import XCTest
+  touch SampleTests.swift
+  echo "import Quick
+import Nimble
+@testable $applicationName
 
-class SampleTests: XCTestCase {
-override func setUpWithError() throws {
+class SampleTests: QuickSpec {
+
 }
-override func tearDownWithError() throws {
-}
-}
-  ' > SampleTests.json
+" > SampleTests.swift
   cd ../
 
   # XCConfigs
@@ -315,6 +313,7 @@ let project = Project.makeModule(
   platform: .iOS,
   product: .app,
   dependencies: [],
+  testDependencies: [.quick, .nimble],
   bridgingHeaderPath: \"Support/BridgingHeader/$applicationName-Bridging-Header.h\",
   customInfoPlist: .file(path: \"Support/InfoPlist/Info.plist\"),
   additionalTargets: []
