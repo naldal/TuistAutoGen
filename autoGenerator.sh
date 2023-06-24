@@ -55,10 +55,27 @@ echo "🏃 Start to generate Tuist Projects!"
 
 GeneratorRoot=$(pwd)
 
-rm -rf TuistProject
 
-mkdir TuistProject && cd TuistProject
-TuistProjectRoot=$GeneratorRoot/TuistProject
+echo "✍️ What is the name of new Project?"
+echo "✏️ Your Name of Project is : "
+read projectName
+echo "Nice Name! 👍"
+echo "😎 I will create $projectName folder when I finish the generation Tuist hiearchy as you wish"
+
+if  [ -d $projectName ]; then
+  echo "The $projectName is already Exist. 😅"
+  echo "You want to replace the $projectName and Re-create? (Y/N)"
+  read yesToDelete
+  if [ "$yesToDelete" == "Y" ]; then
+    rm -rf $projectName
+  else
+    echo "OK. I will Reserve your $projectName 🫡"
+    exit 1
+  fi
+fi
+
+mkdir $projectName && cd $projectName
+TuistProjectRoot=$GeneratorRoot/$projectName
 
 tuist init
 cd Tuist
@@ -104,9 +121,9 @@ echo "🎉 Fetching Dependencies Completed! 👍"
 
 
 cd $GeneratorRoot
-cp -r temp/Lint TuistProject/Projects/Tool/
-cd TuistProject && cd Projects
-makeMainApp $main
+cp -r temp/Lint $projectName/Projects/Tool/
+cd $projectName && cd Projects
+makeMainApp $projectName $main
 tuist generate -n
 echo "✅ $main Generated!"
 
@@ -135,4 +152,4 @@ done
 cd $TuistProjectRoot
 echo '🎉 All Project has Generated! 🫡'
 
-echo '🌱 Your Tuist Projects are in TuistProject folder 🌱'
+echo "🌱 Your Tuist Projects are in $projectName folder 🌱"

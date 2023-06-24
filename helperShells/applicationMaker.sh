@@ -1,6 +1,7 @@
 function makeMainApp() {
   projectName=$1
-  mkdir $projectName && cd $projectName
+  applicationName=$2
+  mkdir $applicationName && cd $applicationName
 
   mkdir Support && cd Support
   mkdir InfoPlist && cd InfoPlist
@@ -81,19 +82,19 @@ function makeMainApp() {
   #import <UIKit/UIKit.h>
 
   #endif /* Common_h */' > Common.h
-  echo "#ifndef $projectName-Bridging-Header.h
-  #define $projectName-Bridging-Header.h
+  echo "#ifndef $applicationName-Bridging-Header.h
+  #define $applicationName-Bridging-Header.h
 
   #import "Common.h"
-  #endif /* $projectName-Bridging-Header.h */
-  " > $projectName-Bridging-Header.h
+  #endif /* $applicationName-Bridging-Header.h */
+  " > $applicationName-Bridging-Header.h
 
   cd ../../
   mkdir Targets
   cd Targets
 
-  mkdir $projectName
-  cd $projectName
+  mkdir $applicationName
+  cd $applicationName
 
   mkdir Resources
   cd Resources
@@ -212,32 +213,32 @@ function makeMainApp() {
       "author" : "xcode",
       "version" : 1
     }
-  }' > Contents.json
+}' > Contents.json
   mkdir AppIcon.appiconset
   cd AppIcon.appiconset
   touch Contents.json
   echo '{
-    "images" : [
-      {
-        "filename" : "appIcon.jpg",
-        "idiom" : "universal",
-        "platform" : "ios",
-        "size" : "1024x1024"
-      }
-    ],
-    "info" : {
-      "author" : "xcode",
-      "version" : 1
-    }
+"images" : [
+  {
+    "filename" : "appIcon.jpg",
+    "idiom" : "universal",
+    "platform" : "ios",
+    "size" : "1024x1024"
   }
+],
+"info" : {
+  "author" : "xcode",
+  "version" : 1
+}
+}
   ' > Contents.json
 
   cd $GeneratorRoot
-  cp "temp/appIcon.jpg" "TuistProject/Projects/$projectName/Targets/$projectName/Resources/Images.xcassets/AppIcon.appiconset/"
+  cp "temp/appIcon.jpg" "$projectName/Projects/$applicationName/Targets/$applicationName/Resources/Images.xcassets/AppIcon.appiconset/"
 
 
-  # $projectName - Sources
-  cd "TuistProject/Projects/$projectName/Targets/$projectName"
+  # $applicationName - Sources
+  cd "$projectName/Projects/$applicationName/Targets/$applicationName"
   mkdir Sources && cd Sources
 
   # AppDelegate, SceneDelegate, ViewController
@@ -247,12 +248,12 @@ function makeMainApp() {
   touch ViewController.swift
   echo 'import UIKit
 
-  class ViewController: UIViewController {
-    
-    override func viewDidLoad() {
-      self.view.backgroundColor = .white
-    }
+class ViewController: UIViewController {
+
+  override func viewDidLoad() {
+    self.view.backgroundColor = .white
   }
+}
   ' > ViewController.swift
 
   cd ../
@@ -269,12 +270,12 @@ function makeMainApp() {
   touch SampleTests.json
   echo 'import XCTest
 
-  class SampleTests: XCTestCase {
-    override func setUpWithError() throws {
-    }
-    override func tearDownWithError() throws {
-    }
-  }
+class SampleTests: XCTestCase {
+override func setUpWithError() throws {
+}
+override func tearDownWithError() throws {
+}
+}
   ' > SampleTests.json
   cd ../
 
@@ -282,7 +283,7 @@ function makeMainApp() {
   mkdir XCConfigs
   cd XCConfigs
 
-  touch $projectName.xcconfig
+  touch $applicationName.xcconfig
   echo 'ASSETCATALOG_COMPILER_APPICON_NAME=AppIcon
 ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME=AccentColor
 CODE_SIGN_IDENTITY=iPhone Developer
@@ -294,46 +295,44 @@ SWIFT_VERSION=5.0
 TARGETED_DEVICE_FAMILY=1
 OTHER_LDFLAGS = $(OTHER_LDFLAGS) -ObjC
 CODE_SIGN_STYLE = Manual
-' > $projectName.xcconfig
+' > $applicationName.xcconfig
 
   touch Debug.xcconfig
   echo "SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG
-  #include \"$projectName.xcconfig"\" > Debug.xcconfig
+  #include \"$applicationName.xcconfig"\" > Debug.xcconfig
 
   touch Release.xcconfig
-  echo "#include \"$projectName.xcconfig\"" > Release.xcconfig
+  echo "#include \"$applicationName.xcconfig\"" > Release.xcconfig
 
   cd ../../../
 
   touch Project.swift
   echo "import ProjectDescription
-  import ProjectDescriptionHelpers
+import ProjectDescriptionHelpers
 
-  let projectName = \"$projectName\"
-  let project = Project.makeModule(
-    name: projectName,
-    platform: .iOS,
-    product: .app,
-    dependencies: [],
-    bridgingHeaderPath: \"Support/BridgingHeader/$projectName-Bridging-Header.h\",
-    customInfoPlist: .file(path: \"Support/InfoPlist/Info.plist\"),
-    additionalTargets: []
-  )" > Project.swift
+let project = Project.makeModule(
+  name: \"$applicationName\",
+  platform: .iOS,
+  product: .app,
+  dependencies: [],
+  bridgingHeaderPath: \"Support/BridgingHeader/$applicationName-Bridging-Header.h\",
+  customInfoPlist: .file(path: \"Support/InfoPlist/Info.plist\"),
+  additionalTargets: []
+)" > Project.swift
 
 }
 
 function makeIncludeOnlyApplication() { 
-  projectName=$1
+  applicationName=$1
   
-  mkdir $projectName && cd $projectName
+  mkdir $applicationName && cd $applicationName
   includeResult=true
   touch Project.swift
   echo "import ProjectDescription
 import ProjectDescriptionHelpers
 
-let projectName: String = \"$projectName\"
 let project = Project.makeModule(
-  name: projectName,
+  name: \"$applicationName\",
   product: .app,
   additionalTargets: [],
   isIncludeOnly: true
@@ -342,12 +341,12 @@ let project = Project.makeModule(
 }
 
 function makeIncludeApplication() { 
-  projectName=$1
+  applicationName=$1
   
   currPath=$(pwd)
-  mkdir $projectName && cd $projectName
+  mkdir $applicationName && cd $applicationName
   mkdir Targets && cd Targets
-  mkdir $projectName && cd $projectName
+  mkdir $applicationName && cd $applicationName
   mkdir Sources && cd Sources
   makeAppDelegate
   makeSceneDelegate
@@ -356,15 +355,14 @@ function makeIncludeApplication() {
   touch sample.json
   echo '{}' > sample.json
   cd $currPath
-  cd $projectName
+  cd $applicationName
 
   touch Project.swift
   echo "import ProjectDescription
 import ProjectDescriptionHelpers
 
-let projectName: String = \"$projectName\"
 let project = Project.makeModule(
-  name: projectName,
+  name: \"$applicationName\",
   product: .app,
   additionalTargets: [],
   isIncludeOnly: false
