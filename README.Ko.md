@@ -49,17 +49,27 @@ Tuist는 모듈화를 지원하지만, 모듈 프로젝트 설정은 도전적�
 ```bash
 ./autoGenerator.sh --main CoreProject
 ```
-설정한 프로젝트 이름은 메인 프로젝트의 이름이 됩니다!
+설정한 이름은 메인 어플리케이션의 이름이 됩니다!
+
+곧 이어, 프로젝트의 이름을 생성합니다.
+```bash
+🏃 Start to generate Tuist Projects!
+✍️ What is the name of new Project?
+✏️ Your Name of Project is :
+<프로젝트 이름 설정>
+```
+설정한 이름은 전체 프로젝트의 이름이 됩니다!
 
 📦TuistAutoGenerator  
- ┣ 📂 temp<br>
-  ┣ 📂 **TuistProject**<br>
-┗ 📜 autoGenerator.sh
+┗ 📜 autoGenerator.sh <br>
+┣ 📂 temp<br>
+┗ 📂 **프로젝트 이름** <br>
+&nbsp;&nbsp;┗ 📂 **Main 어플리케이션 이름**
 
-모든 프로젝트가 포함된 "TuistProject"라는 이름의 폴더가 생성됩니다.
-프로젝트를 생성하려면 TuistProject로 이동하세요.
+이제 위처럼 설정한 프로젝트 이름 아래에 메인 프로젝트가 생성됐습니다.
+Tuist 프로젝트를 시작하려면 설정한 프로젝트 폴더로 이동하세요.
 ```bash
-cd TuistProject
+cd 프로젝트이름
 ```
 
 이제 tuist 프로젝트를 생성하기 위해 generate 명령어를 실행하면 됩니다.
@@ -110,12 +120,32 @@ TuistAutoGen에는 main, includeOnly, include 및 framework의 네 가지 입력
 ./autoGenerator.sh --main $Main_ProjectName --includeOnly $Include_Only_ProjectName
 ```
 
+아래와 같은 구조가 만들어집니다.
+
+📦TuistAutoGenerator  
+┗ 📜 autoGenerator.sh <br>
+┣ 📂 temp<br>
+┗ 📂 **프로젝트 이름** <br>
+&nbsp;&nbsp;┗ 📂 **Main 어플리케이션** <br>
+&nbsp;&nbsp;┗ 📂 **IncludeOnly 어플리케이션**<br>
+
 <br>
 케이스 2) 두 개의 includeOnly 애플리케이션과 하나의 include 애플리케이션을 만들어 볼까요?
 
 ```bash
 ./autoGenerator.sh --main $Main_ProjectName --includeOnly $Include_Only_ProjectName_One --includeOnly $Include_Only_ProjectName_Two --include $Include_ProjectName
+
 ```
+
+
+📦TuistAutoGenerator  
+┗ 📜 autoGenerator.sh <br>
+┣ 📂 temp<br>
+┗ 📂 **프로젝트 이름** <br>
+&nbsp;&nbsp;┗ 📂 **Main 어플리케이션** <br> 
+&nbsp;&nbsp;┗ 📂 **IncludeOnly 어플리케이션 1** <br>
+&nbsp;&nbsp;┗ 📂 **IncludeOnly 어플리케이션 2** <br>
+
 <br>
 
 케이스 3) 프레임워크 생성은 어떨까요?
@@ -124,6 +154,11 @@ TuistAutoGen에는 main, includeOnly, include 및 framework의 네 가지 입력
 ./autoGenerator.sh --main $Main_ProjectName --framework $Framework_ProjectName
 ```
 
+📦TuistAutoGenerator  
+┗ 📜 autoGenerator.sh <br>
+┣ 📂 temp<br>
+┗ 📂 **프로젝트 이름** <br>
+&nbsp;&nbsp;┗ 📂 **프레임워크** <br>
 <br></br>
 
 이제부터 이 옵션들이 무엇을 의미하는지 알아보고 이들의 구조와 왜 이것들이 필요한지에 대해서 설명하겠습니다
