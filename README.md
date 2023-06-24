@@ -50,12 +50,23 @@ For example,
 ```
 The project name you set will be the main project's name!
 
-📦TuistAutoGenerator  
- ┣ 📂 temp<br>
-  ┣ 📂 **TuistProject**<br>
-┗ 📜 autoGenerator.sh
+Next, we generate the project's name.
+```bash
+🏃 Start to generate Tuist Projects!
+✍️ What is the name of new Project?
+✏️ Your Name of Project is :
+<Setting Project Name>
+```
+The chosen name will become the name of the entire project!
 
-Then, a folder the named "TuistProject" that all projects are containing will be created.
+📦TuistAutoGenerator  
+┗ 📜 autoGenerator.sh <br>
+┣ 📂 temp<br>
+┗ 📂 **Project** <br>
+&nbsp;&nbsp;┗ 📂 **Main Application**
+
+이제 위처럼 설정한 프로젝트 이름 아래에 메인 프로젝트가 생성됐습니다.
+Tuist 프로젝트를 시작하려면 설정한 프로젝트 폴더로 이동하세요.
 Go to **TuistProject** to generate your project.
 ```bash
 cd TuistProject
@@ -108,6 +119,16 @@ Case 1) Let's assume that you want to create a main application and an includeOn
 ```bash
 ./autoGenerator.sh --main $Main_ProjectName --includeOnly $Include_Only_ProjectName
 ```
+
+The following folder structure will be created.
+
+📦TuistAutoGenerator  
+┗ 📜 autoGenerator.sh <br>
+┣ 📂 temp<br>
+┗ 📂 **프로젝트 이름** <br>
+&nbsp;&nbsp;┗ 📂 **Main 어플리케이션** <br>
+&nbsp;&nbsp;┗ 📂 **IncludeOnly 어플리케이션**<br>
+
 <br>
 
 Case 2) Let's create two includeOnly applications and one include application.
@@ -116,6 +137,15 @@ There is no problem at all. 😎
 ```bash
 ./autoGenerator.sh --main $Main_ProjectName --includeOnly $Include_Only_ProjectName_One --includeOnly $Include_Only_ProjectName_Two --include $Include_ProjectName
 ```
+
+📦TuistAutoGenerator  
+┗ 📜 autoGenerator.sh <br>
+┣ 📂 temp<br>
+┗ 📂 **Project** <br>
+&nbsp;&nbsp;┗ 📂 **Main Application** <br> 
+&nbsp;&nbsp;┗ 📂 **IncludeOnly Application 1** <br>
+&nbsp;&nbsp;┗ 📂 **IncludeOnly Application 2** <br>
+
 <br>
 Case 3) What about generating a framework?
 
@@ -123,6 +153,11 @@ Case 3) What about generating a framework?
 ./autoGenerator.sh --main $Main_ProjectName --framework $Framework_ProjectName
 ```
 
+📦TuistAutoGenerator  
+┗ 📜 autoGenerator.sh <br>
+┣ 📂 temp<br>
+┗ 📂 **Project** <br>
+&nbsp;&nbsp;┗ 📂 **Framework** <br>
 <br>
 
 Now, let's explore what these options mean, their structure, and why they are necessary.
