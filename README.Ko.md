@@ -63,8 +63,8 @@ Tuist는 모듈화를 지원하지만, 모듈 프로젝트 설정은 도전적�
 📦TuistAutoGenerator  
 ┗ 📜 autoGenerator.sh <br>
 ┣ 📂 temp<br>
-┗ 📂 **프로젝트 이름** <br>
-&nbsp;&nbsp;┗ 📂 **Main 어플리케이션 이름**
+┗ 📂 **프로젝트** <br>
+&nbsp;&nbsp;┗ 📂 **Main 어플리케이션**
 
 이제 위처럼 설정한 프로젝트 이름 아래에 메인 프로젝트가 생성됐습니다.
 Tuist 프로젝트를 시작하려면 설정한 프로젝트 폴더로 이동하세요.
@@ -125,7 +125,7 @@ TuistAutoGen에는 main, includeOnly, include 및 framework의 네 가지 입력
 📦TuistAutoGenerator  
 ┗ 📜 autoGenerator.sh <br>
 ┣ 📂 temp<br>
-┗ 📂 **프로젝트 이름** <br>
+┗ 📂 **프로젝트** <br>
 &nbsp;&nbsp;┗ 📂 **Main 어플리케이션** <br>
 &nbsp;&nbsp;┗ 📂 **IncludeOnly 어플리케이션**<br>
 
@@ -141,7 +141,7 @@ TuistAutoGen에는 main, includeOnly, include 및 framework의 네 가지 입력
 📦TuistAutoGenerator  
 ┗ 📜 autoGenerator.sh <br>
 ┣ 📂 temp<br>
-┗ 📂 **프로젝트 이름** <br>
+┗ 📂 **프로젝트** <br>
 &nbsp;&nbsp;┗ 📂 **Main 어플리케이션** <br> 
 &nbsp;&nbsp;┗ 📂 **IncludeOnly 어플리케이션 1** <br>
 &nbsp;&nbsp;┗ 📂 **IncludeOnly 어플리케이션 2** <br>
@@ -157,7 +157,7 @@ TuistAutoGen에는 main, includeOnly, include 및 framework의 네 가지 입력
 📦TuistAutoGenerator  
 ┗ 📜 autoGenerator.sh <br>
 ┣ 📂 temp<br>
-┗ 📂 **프로젝트 이름** <br>
+┗ 📂 **프로젝트** <br>
 &nbsp;&nbsp;┗ 📂 **프레임워크** <br>
 <br></br>
 
