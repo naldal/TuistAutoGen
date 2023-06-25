@@ -65,8 +65,7 @@ The chosen name will become the name of the entire project!
 ┗ 📂 **Project** <br>
 &nbsp;&nbsp;┗ 📂 **Main Application**
 
-이제 위처럼 설정한 프로젝트 이름 아래에 메인 프로젝트가 생성됐습니다.
-Tuist 프로젝트를 시작하려면 설정한 프로젝트 폴더로 이동하세요.
+Now, the Main project that you set is generated on the under the Project
 Go to **TuistProject** to generate your project.
 ```bash
 cd TuistProject
