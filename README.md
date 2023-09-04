@@ -124,9 +124,9 @@ The following folder structure will be created.
 📦TuistAutoGenerator  
 ┗ 📜 autoGenerator.sh <br>
 ┣ 📂 temp<br>
-┗ 📂 **프로젝트 이름** <br>
-&nbsp;&nbsp;┗ 📂 **Main 어플리케이션** <br>
-&nbsp;&nbsp;┗ 📂 **IncludeOnly 어플리케이션**<br>
+┗ 📂 **Project** <br>
+&nbsp;&nbsp;┗ 📂 **Main Application** <br>
+&nbsp;&nbsp;┗ 📂 **IncludeOnly Application**<br>
 
 <br>
 
