@@ -37,14 +37,14 @@ done
 
 if [ -z "$main" ] && [ -z "$frameworks" ]; then
     echo "The Main project name is not set."
-    echo "Would you like to set the default project name as "Default"? (Y/N)"
+    echo "Would you like to set the default project name as "TuistProject"? (Y/N)"
     read yesToContinue
     if [ "$yesToContinue" == "N" ] ; then
       echo "Exiting the process. 😔"
       exit 1
     elif [ "$yesToContinue" == "Y" ] ; then
-      echo "The Default project will be created. 🙂"
-      main="Default"
+      echo "The TuistProject project will be created. 🙂"
+      main="TuistProject"
     else
       echo "Unknown input 🙉"
       exit 1
@@ -56,11 +56,11 @@ echo "🏃 Start to generate Tuist Projects!"
 GeneratorRoot=$(pwd)
 
 
-echo "✍️ What is the name of new Project?"
-echo "✏️ Your Name of Project is : "
+echo "✍️ What is the name of your new project folder?"
+echo "✏️ Your Name of new project folder is : "
 read projectName
 echo "Nice Name! 👍"
-echo "😎 I will create $projectName folder when I finish the generation Tuist hiearchy as you wish"
+echo "😎 I will create the $projectName folder once I finish generating the Tuist hierarchy as you wish."
 
 if  [ -d $projectName ]; then
   echo "The $projectName is already Exist. 😅"
@@ -122,10 +122,14 @@ echo "🎉 Fetching Dependencies Completed! 👍"
 
 cd $GeneratorRoot
 cp -r temp/Lint $projectName/Projects/Tool/
-cd $projectName && cd Projects
-makeMainApp $projectName $main
-tuist generate -n
-echo "✅ $main Generated!"
+
+if [ -n "$main" ] && [ -z "$frameworks" ]; then
+  cd $projectName && cd Projects
+  makeMainApp $projectName $mainApp
+  tuist generate -n
+  echo "✅ $mainApp Generated!"
+fi
+cd $TuistProjectRoot
 
 for aFramework in "${frameworks[@]}"; do
   cd $ProjectsPath
@@ -152,4 +156,6 @@ done
 cd $TuistProjectRoot
 echo '🎉 All Project has Generated! 🫡'
 
-echo "🌱 Your Tuist Projects are in $projectName folder 🌱"
+cd ../
+mv ./$projectName ~/
+echo "🌱 Your new project is: $HOME/$projectName 🌱"
