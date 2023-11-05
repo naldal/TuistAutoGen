@@ -69,17 +69,33 @@ function makeFramework() {
 </dict>
 </plist>
 ' > "$frameworkName-Info.plist"
-  cd ../../  
   mkdir Targets && cd Targets
+  cd ../../
+
   mkdir $frameworkName && cd $frameworkName
   
-  mkdir Sources && cd Sources
+
+  mkdir {Sources,Resources}
+  
   touch sample.swift
-  echo 'sample' > sample.swift
-  cd ../
-  mkdir Resources && cd Resources 
+  echo 'sample' > ./Sources/sample.swift
   touch sample.json
-  echo '{}' > sample.json
+  echo '{}' > ./Resources/sample.json
+
+  mkdir -p TestHost/{Sources,Resources}
+  touch sample.swift
+  echo 'sample' > ./TestHost/Sources/sample.swift
+  touch sample.json
+  echo '{}' > ./TestHost//Resources/sample.json
+
+  mkdir -p SampleApp/{Sources,Resources}
+  touch sample.swift
+  echo 'sample' > ./SampleApp/Sources/sample.swift
+  touch sample.json
+  echo '{}' > ./SampleApp//Resources/sample.json
+  
+  mkdir Test 
+  echo 'sampleTest' > ./Test/sampleTest.swift
 
   cd ../../../
   touch Project.swift
@@ -91,7 +107,7 @@ let project = Project(
   name: projectName,
   targets: Project.makeFrameworkTargets(
     name: projectName,
-    customInfoPlist: .default,
+    customInfoPlist: .file(path: \"../\(projectName)/Support/InfoPlist/\(projectName)-Info.plist\"),
     dependencies: [],
     testDependencies: []
   )

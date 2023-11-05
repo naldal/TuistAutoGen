@@ -223,21 +223,21 @@ extension Project {
       product: frameworkType,
       bundleId: "\(baseBundleId).\(name)",
       infoPlist: customInfoPlist,
-      sources: ["Targets/\(name)/Sources/**"],
-      resources: ["Targets/\(name)/Resources/**"],
+      sources: ["Sources/**"],
+      resources: ["Resources/**"],
       scripts: scripts,
       dependencies: dependencies
     )
-          
-    let testTarget = Target(
-      name: "\(name)Tests",
+
+    let testHostApp = Target(
+      name: "\(name)TestHost",
       platform: .iOS,
-      product: .unitTests,
-      bundleId: "\(baseBundleId).\(name)Tests",
-      infoPlist: .default,
-      sources: ["Targets/\(name)/Sources/**"],
-      resources: ["Targets/\(name)/Resources/**"],
-      dependencies: [.target(name: name)] + testDependencies
+      product: .app,
+      bundleId: "com.wemade.\(name)TestHost",
+      infoPlist: customInfoPlist,
+      sources: ["TestHost/Sources/**"],
+      resources: ["TestHost/Resources/**"],
+      dependencies: [.target(name: name)]
     )
           
     let sampleApp = Target(
@@ -246,12 +246,23 @@ extension Project {
       product: .app,
       bundleId: "\(baseBundleId).\(name)SampleApp",
       infoPlist: customInfoPlist,
-      sources: ["Targets/\(name)/Sources/**"],
-      resources: ["Targets/\(name)/Resources/**"],
+      sources: ["SampleApp/Sources/**"],
+      resources: ["SampleApp/Resources/**"],
       dependencies: [.target(name: name)]
     )
+            
+    let testTarget = Target(
+      name: "\(name)Tests",
+      platform: .iOS,
+      product: .unitTests,
+      bundleId: "\(baseBundleId).\(name)Tests",
+      infoPlist: .default,
+      sources: ["Tests/**"],
+      resources: [],
+      dependencies: [.target(name: name), .target(name: "\(name)TestHost")] + testDependencies
+    )
           
-    return [mainTarget, testTarget, sampleApp]
+    return [mainTarget, testHostApp, testTarget, sampleApp]
   }
 }' >Project+Framework.swift
 }
